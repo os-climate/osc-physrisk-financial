@@ -1,0 +1,60 @@
+---
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2024 The Linux Foundation <matthew.watkins@linuxfoundation.org>
+
+ci:
+  autofix_commit_msg: "Chore: pre-commit autoupdate"
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: check-case-conflict
+      - id: check-executables-have-shebangs
+      - id: check-merge-conflict
+      - id: check-shebang-scripts-are-executable
+      - id: check-symlinks
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+        args: ["--fix=lf"]
+      - id: no-commit-to-branch
+      # - id: pretty-format-json
+      - id: trailing-whitespace
+
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.41.0
+    hooks:
+      - id: markdownlint
+        args: ["--fix"]
+
+  - repo: https://github.com/jorisroovers/gitlint
+    rev: v0.19.1
+    hooks:
+      - id: gitlint
+
+  - repo: https://github.com/openstack/bashate
+    rev: 2.1.1
+    hooks:
+      - id: bashate
+
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.10.0.1
+    hooks:
+      - id: shellcheck
+
+  - repo: https://github.com/adrienverge/yamllint.git
+    rev: v1.35.1
+    hooks:
+      - id: yamllint
+
+  - repo: https://github.com/fsfe/reuse-tool
+    rev: v3.0.2
+    hooks:
+      - id: reuse
+
+  # Check for misspellings in documentation files
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.2.2
+    hooks:
+      - id: codespell
