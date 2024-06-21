@@ -1,0 +1,39 @@
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+[tool.setuptools_scm]
+# For smarter version schemes and other configuration options,
+# check out https://github.com/pypa/setuptools_scm
+version_scheme = "no-guess-dev"
+
+[tool.pdm]
+package-dir = "src"
+
+[project]
+name = "osc-physrisk-financial"
+description = "OS-Climate Python Project"
+readme = "README.rst"
+authors = [
+    {name = "github-actions[bot]", email = "41898282+github-actions[bot]@users.noreply.github.com"},
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python",
+]
+dependencies = [
+    "importlib-metadata; python_version<\"3.8\"",
+]
+license = {text = "Apache-2.0"}
+requires-python = ">=3.10"
+
+[project.urls]
+Homepage = "https://github.com/pyscaffold/pyscaffold/"
+Documentation = "https://pyscaffold.org/"
+
+[project.optional-dependencies]
+testing = [
+    "pytest",
+    "pytest-cov",
+    "setuptools",
+]
