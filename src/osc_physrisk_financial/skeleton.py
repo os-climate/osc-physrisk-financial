@@ -1,6 +1,7 @@
 """
-This is a skeleton file that can serve as a starting point for a Python
-console script. To run this script uncomment the following lines in the
+Sample file as starting point for a Python console script.
+
+To run this script uncomment the following lines in the
 ``[options.entry_points]`` section in ``setup.cfg``::
 
     console_scripts =
@@ -41,7 +42,7 @@ _logger = logging.getLogger(__name__)
 
 
 def fib(n):
-    """Fibonacci example function
+    """Fibonacci example function.
 
     Args:
       n (int): integer
@@ -63,7 +64,7 @@ def fib(n):
 
 
 def parse_args(args):
-    """Parse command line parameters
+    """Parse command line parameters.
 
     Args:
       args (List[str]): command line parameters as list of strings
@@ -99,7 +100,7 @@ def parse_args(args):
 
 
 def setup_logging(loglevel):
-    """Setup basic logging
+    """Set up basic logging.
 
     Args:
       loglevel (int): minimum loglevel for emitting messages
@@ -111,7 +112,7 @@ def setup_logging(loglevel):
 
 
 def main(args):
-    """Wrapper allowing :func:`fib` to be called with string arguments in a CLI fashion
+    """Allow :func:`fib` to be called with string arguments.
 
     Instead of returning the value from :func:`fib`, it prints the result to the
     ``stdout`` in a nicely formatted message.
@@ -128,9 +129,9 @@ def main(args):
 
 
 def run():
-    """Calls :func:`main` passing the CLI arguments extracted from :obj:`sys.argv`
+    """Create console script entry point with setuptools.
 
-    This function can be used as entry point to create console scripts with setuptools.
+    Calls :func:`main` passing the CLI arguments extracted from :obj:`sys.argv`
     """
     main(sys.argv[1:])
 
