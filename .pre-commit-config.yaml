@@ -83,8 +83,8 @@ repos:
     rev: v1.35.1
     hooks:
       - id: yamllint
-        args: >
-          [ "-d", "{rules: {line-length: {max: 120}},
+        args:
+          ["-d", "{rules: {line-length: {max: 120}},
           ignore-from-file: [.gitignore],}"]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
@@ -100,8 +100,7 @@ repos:
         name: "create mypy cache"
         language: system
         pass_filenames: false
-        entry: >
-          bash -c 'if [ ! -d .mypy_cache ];
+        entry: bash -c 'if [ ! -d .mypy_cache ];
           then /bin/mkdir .mypy_cache; fi; exit 0'
 
   - repo: https://github.com/pre-commit/mirrors-mypy
