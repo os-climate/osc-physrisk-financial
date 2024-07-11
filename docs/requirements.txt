@@ -1,7 +1,0 @@
-myst_parser>=3.0.1
-pydata_sphinx_theme>=0.15.4
-# Requirements file for ReadTheDocs, check .readthedocs.yml.
-# To build the module reference correctly, make sure every external package
-# under `install_requires` in `setup.cfg` is also listed here!
-sphinx>=7.3.7
-sphinx_design>=0.6.0
