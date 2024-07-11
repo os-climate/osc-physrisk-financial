@@ -301,7 +301,7 @@ class DiscreteRandomVariable(RandomVariable):
         - When the probabilities do not sum to one, as in the case of the ImpactDistrib class from OS-C, we add the missing value to zero
           to make the sum equal to one. In this way, we create a "mass point" at zero, meaning that we take the mean value for each interval
           except for zero, where we assign the remaining the probability.
-          TODO: We need to check the output (methodology implemented in code) of OS-C impact distribution so we are sure the constructor of 
+          TODO: We need to check the output (methodology implemented in code) of OS-C impact distribution so we are sure the constructor of
           this class is properly defined. That is to say, verify that methodologically this is what we want given OS-C code.
 
     """
@@ -310,8 +310,8 @@ class DiscreteRandomVariable(RandomVariable):
         self,
         probabilities: Sequence[Union[float, int]],
         values: Optional[Sequence[Union[float, int]]] = None,
-        intervals: Sequence[Union[float, int]] = None,
-        convert_to_osc_format : Optional[bool] = False,
+        intervals: Optional[Sequence[Union[float, int]]] = None,
+        convert_to_osc_format: Optional[bool] = False,
     ):
         """Initialize the ExampleClass with probabilities, and either values or intervals.
 
@@ -354,7 +354,7 @@ class DiscreteRandomVariable(RandomVariable):
                     )
                 total_prob = np.sum(probabilities)
                 print(total_prob)
-                if not np.isclose(total_prob,1):
+                if not np.isclose(total_prob, 1):
                     intervals = np.array(intervals)
                     if 0 in intervals:
                         zero_index = np.where(intervals == 0)[0][0]

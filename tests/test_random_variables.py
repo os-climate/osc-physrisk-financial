@@ -28,12 +28,15 @@ def test_init():
         )
         is False
     )
-    assert DiscreteRandomVariable(
-        intervals=intervals,
-        values=None,
-        probabilities=probabilities,
-        convert_to_osc_format=True,
-    ) is not None
+    assert (
+        DiscreteRandomVariable(
+            intervals=intervals,
+            values=None,
+            probabilities=probabilities,
+            convert_to_osc_format=True,
+        )
+        is not None
+    )
 
 
 def test_init_value_errors():

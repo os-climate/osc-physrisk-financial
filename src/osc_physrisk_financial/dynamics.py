@@ -20,12 +20,12 @@ class Dynamic(ABC):
 
     def __init__(self, name: Optional[str] = None):
         """Initialize a new instance of Dynamic.
-        
+
         Attributes
         ----------
         name : string, optional
             Name for identification.
-        
+
         """
         self.name = name
         self.data = pd.DataFrame()
@@ -75,18 +75,18 @@ class ConstantGrowth(Dynamic):
 
     def __init__(self, growth_rate: float, value0: float, name: Optional[str] = None):
         r"""Initialize a new instance of ConstantGrowth.
-        
+
         Attributes
         ----------
         growth_rate : float
             Constant  growth rate :math:`\mu.`
-            
+
         value0 : float
             :math:`V_0` in [Methodology]
-            
+
         name : string, optional
             Name for identification.
-        
+
         """
         super().__init__(name=name)
         self.growth_rate = growth_rate

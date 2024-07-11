@@ -5,8 +5,8 @@ Read more about conftest.py under:
 - https://docs.pytest.org/en/stable/fixture.html
 - https://docs.pytest.org/en/stable/writing_plugins.html
 """
+
 import os
 import sys
 
-sys.path.append(os.path.normpath(os.path.join(os.path.dirname(__file__), '../src'))
-)
+sys.path.append(os.path.normpath(os.path.join(os.path.dirname(__file__), "../src")))

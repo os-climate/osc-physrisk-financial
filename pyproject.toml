@@ -61,4 +61,3 @@ source = "scm"
 write_to = "osc_physrisk_financial/_version.py"
 write_template = "version: str\n__version__: str\n__version__ = version =  '{}'\n"
 tag_regex = '^(?:[\w-]+-)?(?P<version>[vV]?\d+(?:\.\d+){0,2}[^\+-]*?)(?:\-.*)?(?:\+.*)?(?:\-.*)?$'
-
