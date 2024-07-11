@@ -12,28 +12,53 @@ package-dir = "src"
 
 [project]
 name = "osc-physrisk-financial"
-description = "OS-Climate Python Project"
-readme = "README.rst"
+description = "Physical climate risk financial valuation"
+readme = "README.md"
+dynamic = ["version"]
+keywords = ["Financial risk", "climate", "Physical risk"]
 authors = [
-    {name = "github-actions[bot]", email = "41898282+github-actions[bot]@users.noreply.github.com"},
+    {name = "Arfima Dev", email = "dev@arfima.com"},
 ]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Programming Language :: Python",
 ]
 dependencies = [
-    "importlib-metadata; python_version<\"3.8\"",
+    "scipy>=1.10.1",
+    "pandas>=2.0.3",
+    "plotly>=5.15",
+    "numpy>=1.24",
 ]
 license = {text = "Apache-2.0"}
 requires-python = ">=3.10"
 
 [project.urls]
-Homepage = "https://github.com/pyscaffold/pyscaffold/"
-Documentation = "https://pyscaffold.org/"
+"Homepage" = "https://github.com/os-climate/osc-physrisk-financial"
+"Documentation" = "https://github.com/os-climate/osc-physrisk-financial"
+"Bug Tracker" = "https://github.com/os-climate/osc-physrisk-financial/issues"
+
 
 [project.optional-dependencies]
+docs = [
+  "sphinx>=5.3.0",
+  "sphinx_copybutton==0.5.0",
+  "sphinx_toggleprompt==0.2.0",
+  "myst_nb==0.16.0",
+  "sphinx_design==0.3",
+  "pydata-sphinx-theme==0.13.3",
+  "sphinx_simplepdf",
+  "numpydoc>=1.6.0",
+  "sphinxcontrib.bibtex",
+  "nbsphinx"
+]
 testing = [
     "pytest",
     "pytest-cov",
-    "setuptools",
 ]
+
+[tool.pdm.version]
+source = "scm"
+write_to = "osc_physrisk_financial/_version.py"
+write_template = "version: str\n__version__: str\n__version__ = version =  '{}'\n"
+tag_regex = '^(?:[\w-]+-)?(?P<version>[vV]?\d+(?:\.\d+){0,2}[^\+-]*?)(?:\-.*)?(?:\+.*)?(?:\-.*)?$'
+
