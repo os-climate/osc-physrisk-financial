@@ -1,40 +1,98 @@
+Physrisk Financial
 ======================
-osc-physrisk-financial
-======================
 
-This is the documentation of **osc-physrisk-financial**.
+- **version**: 0.1 (See `Changelog <changelog.html>`_)
+- **date**: July 4th 2024
 
-.. note::
+An OS-Climate project, **osc-physrisk-financial** is a library for valuating assets under different climate risk scenarios.
 
-    This is the main page of your project's `Sphinx`_ documentation.
-    It is formatted in `reStructuredText`_. Add additional pages
-    by creating rst-files in ``docs`` and adding them to the `toctree`_ below.
-    Use then `references`_ in order to link them from this page, e.g.
-    :ref:`authors` and :ref:`changes`.
+.. _cards-clickable:
 
-    It is also possible to refer to the documentation of other Python packages
-    with the `Python domain syntax`_. By default you can reference the
-    documentation of `Sphinx`_, `Python`_, `NumPy`_, `SciPy`_, `matplotlib`_,
-    `Pandas`_, `Scikit-Learn`_. You can add more by extending the
-    ``intersphinx_mapping`` in your Sphinx's ``conf.py``.
+..
+  list with all the possible icons for the grid
+  https://sphinx-design.readthedocs.io/en/latest/badges_buttons.html
 
-    The pretty useful extension `autodoc`_ is activated by default and lets
-    you include documentation from docstrings. Docstrings can be written in
-    `Google style`_ (recommended!), `NumPy style`_ and `classical style`_.
+.. raw:: html
+
+   <style>
+       .grid {
+           display: grid;
+           grid-template-columns: repeat(2, 1fr);
+           grid-template-rows: repeat(4, 1fr);
+           grid-gap: 10px; /* Ajusta el valor según el espaciado deseado */
+           gap: 100px 100px;
+       }
+   </style>
+
+
+.. grid:: 2
+    :gutter: 1
+
+    .. grid-item-card::  Overview
+      :link: readme.html
+      :text-align: center
+
+      :octicon:`book;5em;sd-text-info`
+      ^^^
+      Check the getting started guides and tutorials to learn how to install and use **osc-physrisk-financial**.
+
+    .. grid-item-card::  Code documentation
+      :link: modules.html
+      :text-align: center
+
+      :octicon:`code;5em;sd-text-info`
+      ^^^
+      Check the documentation of the code used in **osc-physrisk-financial**.
+
+.. grid:: 2
+    :gutter: 1
+
+    .. grid-item-card::  Changelog
+      :link: changelog.html
+      :text-align: center
+
+      :octicon:`list-ordered;5em;sd-text-info`
+      ^^^
+      Check the history of the evolution of the code.
+
+    .. grid-item-card:: Contributions & Help
+      :link: contributing.html
+      :text-align: center
+
+      :octicon:`code-of-conduct;5em;sd-text-info`
+      ^^^
+      If you want to contribute to the development take a look to the development guidelines first.
+
+.. grid:: 2
+    :gutter: 1
+
+    .. grid-item-card::  Authors
+      :link: authors.html
+      :text-align: center
+
+      :octicon:`people;5em;sd-text-info`
+      ^^^
+
+    .. grid-item-card::  License
+      :link: license.html
+      :text-align: center
+
+      :octicon:`file-badge;5em;sd-text-info`
+      ^^^
 
 
 Contents
-========
+==========
 
 .. toctree::
    :maxdepth: 2
 
    Overview <readme>
-   Contributions & Help <contributing>
-   License <license>
-   Authors <authors>
+   Code documentation <modules>
    Changelog <changelog>
-   Module Reference <api/modules>
+   Contributions & Help <contributing>
+   Authors <authors>
+   License <license>
 
 
 Indices and tables
