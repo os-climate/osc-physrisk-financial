@@ -1,5 +1,4 @@
-"""
-This is a skeleton file that can serve as a starting point for a Python
+"""This is a skeleton file that can serve as a starting point for a Python
 console script. To run this script uncomment the following lines in the
 ``[options.entry_points]`` section in ``setup.cfg``::
 
@@ -13,11 +12,14 @@ Besides console scripts, the header (i.e. until ``_logger``...) of this file can
 also be used as template for Python modules.
 
 Note:
+----
     This file can be renamed depending on your needs or safely removed if not needed.
 
 References:
+----------
     - https://setuptools.pypa.io/en/latest/userguide/entry_point.html
     - https://pip.pypa.io/en/stable/reference/pip_install
+
 """
 
 import argparse
@@ -44,10 +46,13 @@ def fib(n):
     """Fibonacci example function
 
     Args:
+    ----
       n (int): integer
 
     Returns:
+    -------
       int: n-th Fibonacci number
+
     """
     assert n > 0
     a, b = 1, 1
@@ -66,11 +71,14 @@ def parse_args(args):
     """Parse command line parameters
 
     Args:
+    ----
       args (List[str]): command line parameters as list of strings
           (for example  ``["--help"]``).
 
     Returns:
+    -------
       :obj:`argparse.Namespace`: command line parameters namespace
+
     """
     parser = argparse.ArgumentParser(description="Just a Fibonacci demonstration")
     parser.add_argument(
@@ -102,7 +110,9 @@ def setup_logging(loglevel):
     """Setup basic logging
 
     Args:
+    ----
       loglevel (int): minimum loglevel for emitting messages
+
     """
     logformat = "[%(asctime)s] %(levelname)s:%(name)s:%(message)s"
     logging.basicConfig(
@@ -117,8 +127,10 @@ def main(args):
     ``stdout`` in a nicely formatted message.
 
     Args:
+    ----
       args (List[str]): command line parameters as list of strings
           (for example  ``["--verbose", "42"]``).
+
     """
     args = parse_args(args)
     setup_logging(args.loglevel)
