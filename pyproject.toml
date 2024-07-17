@@ -2,38 +2,141 @@
 requires = ["pdm-backend"]
 build-backend = "pdm.backend"
 
-[tool.setuptools_scm]
-# For smarter version schemes and other configuration options,
-# check out https://github.com/pypa/setuptools_scm
-version_scheme = "no-guess-dev"
-
 [tool.pdm]
 package-dir = "src"
 
 [project]
 name = "osc-physrisk-financial"
-description = "OS-Climate Python Project"
-readme = "README.rst"
+description = "Physical climate risk financial valuation"
+readme = "README.md"
+dynamic = ["version"]
+keywords = ["Financial risk", "climate", "Physical risk"]
 authors = [
-    {name = "github-actions[bot]", email = "41898282+github-actions[bot]@users.noreply.github.com"},
+    {name = "Arfima Dev", email = "dev@arfima.com"},
 ]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Programming Language :: Python",
 ]
 dependencies = [
-    "importlib-metadata; python_version<\"3.8\"",
+    "scipy>=1.10.1",
+    "pandas>=2.0.3",
+    "plotly>=5.15",
+    "numpy>=1.24",
 ]
 license = {text = "Apache-2.0"}
 requires-python = ">=3.10"
 
 [project.urls]
-Homepage = "https://github.com/pyscaffold/pyscaffold/"
-Documentation = "https://pyscaffold.org/"
+"Homepage" = "https://github.com/os-climate/osc-physrisk-financial"
+"Documentation" = "https://github.com/os-climate/osc-physrisk-financial"
+"Bug Tracker" = "https://github.com/os-climate/osc-physrisk-financial/issues"
+
 
 [project.optional-dependencies]
-testing = [
+docs = [
+  "myst_parser>=3.0.1",
+  "pydata_sphinx_theme>=0.15.4",
+  "sphinx>=7.3.7",
+  "sphinx_design>=0.6.0"
+]
+lint = ["pre-commit"]
+test = [
+    "pdm[pytest]",
     "pytest",
     "pytest-cov",
-    "setuptools",
 ]
+tox = ["tox", "tox-pdm"]
+
+[tool.pdm.version]
+source = "scm"
+write_to = "osc_physrisk_financial/_version.py"
+write_template = "version: str\n__version__: str\n__version__ = version =  '{}'\n"
+# Semver like tag, ignore after + or -
+# tag_regex = '^(?:[\w-]+-)?(?P<version>[vV]?\d+(?:\.\d+){0,2}[^\+-]*?)(?:\-.*)?(?:\+.*)?(?:\-.*)?$'
+# PyPa-compliant (Removing trailing (?:\.dev(?:\d+))? as it would be handled by PDM)
+tag_regex = '^(?P<version>[vV]??(?:(?:\d+)(?:\.(?:\d+))*)(?:(?:a|b|rc|alpha|beta|c)(?:\d+)?)?(?:\.post(?:\d+))?)$'
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests/",
+]
+addopts = "--cov=src --cov-report html --cov-report term-missing --cov-fail-under 65"
+
+[tool.coverage.run]
+source = ["src"]
+
+[tool.mypy]
+ignore_missing_imports = true
+
+
+[tool.ruff]
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "venv",
+]
+
+[tool.ruff.lint]
+extend-fixable = [
+    # Instead of trailing-whitespace
+    "W291", "W293"
+    ]
+
+extend-select = [
+    # Instead of pydocstyle
+    "D",
+    #Instead of flake8
+    "E", "F","B",
+    # Instead of pep8-naming
+    "N",
+    # Instead of flake8-debugger or debug-statements
+    "T10",
+]
+
+ignore = [
+    "E203",
+    "E501",
+    # Avoid incompatible rules
+    "D203",
+    "D213",
+]
+
+[tool.ruff.lint.extend-per-file-ignores]
+# Ignore `D` rules everywhere except for the `src/` directory.
+"!src/**.py" = ["D"]
+
+[tool.ruff.lint.pycodestyle]
+max-line-length = 160
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+docstring-code-format = false
+docstring-code-line-length = "dynamic"

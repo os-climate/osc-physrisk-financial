@@ -4,4 +4,5 @@
 License
 =======
 
-.. include:: ../LICENSE.txt
+.. include:: ../LICENSES/Apache-2.0.txt
+   :parser: myst_parser.sphinx_

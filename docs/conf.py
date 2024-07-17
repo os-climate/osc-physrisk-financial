@@ -9,7 +9,6 @@
 
 import os
 import sys
-import shutil
 
 # -- Path setup --------------------------------------------------------------
 
@@ -28,31 +27,31 @@ sys.path.insert(0, os.path.join(__location__, "../src"))
 # setup.py install" in the RTD Advanced Settings.
 # Additionally it helps us to avoid running apidoc manually
 
-try:  # for Sphinx >= 1.7
-    from sphinx.ext import apidoc
-except ImportError:
-    from sphinx import apidoc
+# try:  # for Sphinx >= 1.7
+#     from sphinx.ext import apidoc
+# except ImportError:
+#     from sphinx import apidoc
 
-output_dir = os.path.join(__location__, "api")
-module_dir = os.path.join(__location__, "../src/osc_physrisk_financial")
-try:
-    shutil.rmtree(output_dir)
-except FileNotFoundError:
-    pass
+# # output_dir = os.path.join(__location__, "api")
+# module_dir = os.path.join(__location__, "../src/osc_physrisk_financial")
+# try:
+#     shutil.rmtree(output_dir)
+# except FileNotFoundError:
+#     pass
 
-try:
-    import sphinx
+# try:
+#     import sphinx
 
-    cmd_line = f"sphinx-apidoc --implicit-namespaces -f -o {output_dir} {module_dir}"
+#     cmd_line = f"sphinx-apidoc --implicit-namespaces -f -o {output_dir} {module_dir}"
 
-    args = cmd_line.split(" ")
-    if tuple(sphinx.__version__.split(".")) >= ("1", "7"):
-        # This is a rudimentary parse_version to avoid external dependencies
-        args = args[1:]
+#     args = cmd_line.split(" ")
+#     if tuple(sphinx.__version__.split(".")) >= ("1", "7"):
+#         # This is a rudimentary parse_version to avoid external dependencies
+#         args = args[1:]
 
-    apidoc.main(args)
-except Exception as e:
-    print("Running `sphinx-apidoc` failed!\n{}".format(e))
+#     apidoc.main(args)
+# except Exception as e:
+#     print("Running `sphinx-apidoc` failed!\n{}".format(e))
 
 # -- General configuration ---------------------------------------------------
 
@@ -63,7 +62,6 @@ except Exception as e:
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = [
     "sphinx.ext.autodoc",
-    "sphinx.ext.intersphinx",
     "sphinx.ext.todo",
     "sphinx.ext.autosummary",
     "sphinx.ext.viewcode",
@@ -72,6 +70,8 @@ extensions = [
     "sphinx.ext.ifconfig",
     "sphinx.ext.mathjax",
     "sphinx.ext.napoleon",
+    "sphinx_design",
+    "myst_parser",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -88,7 +88,18 @@ master_doc = "index"
 
 # General information about the project.
 project = "osc-physrisk-financial"
-copyright = "2024, github-actions[bot]"
+copyright = "2024, Arfima Dev"
+author = "Arfima Dev"
+
+# Summary
+autosummary_generate = True
+
+# Docstrings of private methods
+autodoc_default_options = {
+    "members": True,
+    "undoc-members": True,
+    "private-members": False,
+}
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -153,14 +164,15 @@ todo_emit_warnings = True
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = "alabaster"
-
+# html_theme = "alabaster"
+html_theme = "pydata_sphinx_theme"
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 html_theme_options = {
-    "sidebar_width": "300px",
-    "page_width": "1200px"
+    # "sidebar_width": "300px",
+    # "page_width": "1200px",
+    "logo": {"text": "PhysRisk Financial"}
 }
 
 # Add any paths that contain custom themes here, relative to this directory.
@@ -168,14 +180,14 @@ html_theme_options = {
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
-# html_title = None
+html_title = "Physrisk Financial Documentation"
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
 # html_short_title = None
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
-# html_logo = ""
+html_logo = "images/OS-Climate-Logo.png"
 
 # The name of an image file (within the static path) to use as favicon of the
 # docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
@@ -196,7 +208,13 @@ html_static_path = ["_static"]
 # html_use_smartypants = True
 
 # Custom sidebar templates, maps document names to template names.
-# html_sidebars = {}
+html_sidebars = {
+    "readme": [],
+    "changelog": [],
+    "authors": [],
+    "contributing": [],
+    "license": [],
+}
 
 # Additional templates that should be rendered to pages, maps page names to
 # template names.
@@ -246,7 +264,13 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-    ("index", "user_guide.tex", "osc-physrisk-financial Documentation", "github-actions[bot]", "manual")
+    (
+        "index",
+        "user_guide.tex",
+        "osc-physrisk-financial Documentation",
+        "Arfima Dev",
+        "manual",
+    )
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
