@@ -9,9 +9,6 @@ on:
   # workflow_dispatch:
   push:
     # Only invoked on release tag pushes
-    branches:
-      - 'main'
-      - 'master'
     tags:
       - 'v*.*.*'
 
@@ -44,11 +41,6 @@ jobs:
       - name: "Setup PDM for build commands"
         uses: pdm-project/setup-pdm@v4
 
-      - name: "Update version from tags for production release"
-        run: |
-          echo "Github versioning: ${{ github.ref_name }}"
-          scripts/release-versioning.sh
-
       - name: "Build with PDM backend"
         run: |
           pdm build
@@ -56,7 +48,7 @@ jobs:
       ### SIGNING ###
 
       - name: "Sign packages with Sigstore"
-        uses: sigstore/gh-action-sigstore-python@v2
+        uses: sigstore/gh-action-sigstore-python@v2.1.1
         with:
           inputs: >-
             ./dist/*.tar.gz
