@@ -1,16 +1,16 @@
----
-# SPDX-License-Identifier: Apache-2.0
-# Copyright 2024 The Linux Foundation <mwatkins@linuxfoundation.org>
+# For most projects, this workflow file will not need changing; you simply need
+# to commit it to your repository.
+#
+# You may wish to alter this file to override the set of languages analyzed,
+# or to provide custom queries or build logic.
+#
+# ******** NOTE ********
+# We have attempted to detect the languages in your repository. Please check
+# the `language` matrix defined below to confirm you have the correct set of
+# supported CodeQL languages.
+#
+name: "🔐 CodeQL"
 
-name: "CodeQL"
-
-# yamllint disable rule:line-length
-# yamllint disable rule:brackets
-# yamllint disable rule:indentation
-# yamllint disable rule:comments
-# yamllint disable rule:comments-indentation
-
-# yamllint disable-line rule:truthy
 on:
   push:
     branches: [ "main", "gh-pages", "master" ]
@@ -46,14 +46,9 @@ jobs:
         include:
         - language: python
           build-mode: none
-        # CodeQL supports the following values keywords for 'language': 'c-cpp', 'csharp', 'go', 'java-kotlin', 'javascript-typescript', 'python', 'ruby', 'swift'
-        # Use `c-cpp` to analyze code written in C, C++ or both
-        # Use 'java-kotlin' to analyze code written in Java, Kotlin or both
-        # Use 'javascript-typescript' to analyze code written in JavaScript, TypeScript or both
-        # To learn more about changing the languages that are analyzed or customizing the build mode for your analysis,
-        # see https://docs.github.com/en/code-security/code-scanning/creating-an-advanced-setup-for-code-scanning/customizing-your-advanced-setup-for-code-scanning.
-        # If you are analyzing a compiled language, you can modify the 'build-mode' for that language to customize how
-        # your codebase is analyzed, see https://docs.github.com/en/code-security/code-scanning/creating-an-advanced-setup-for-code-scanning/codeql-code-scanning-for-compiled-languages
+        # CodeQL supports the following values keywords for 'language':
+        #  'c-cpp', 'csharp', 'go', 'java-kotlin', 'javascript-typescript', 'python', 'ruby', 'swift'
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -68,15 +63,10 @@ jobs:
         # By default, queries listed here will override any specified in a config file.
         # Prefix the list here with "+" to use these queries and those in the config file.
 
-        # For more details on CodeQL's query packs, refer to: https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
-        # queries: security-extended,security-and-quality
-
     # If the analyze step fails for one of the languages you are analyzing with
     # "We were unable to automatically build your code", modify the matrix above
     # to set the build mode to "manual" for that language. Then modify this step
     # to build your code.
-    # ℹ️ Command-line programs to run using the OS shell.
-    # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
     - if: matrix.build-mode == 'manual'
       shell: bash
       run: |
