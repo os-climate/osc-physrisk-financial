@@ -353,7 +353,6 @@ class DiscreteRandomVariable(RandomVariable):
                         "Impact bins must be sorted in non-decreasing order."
                     )
                 total_prob = np.sum(probabilities_np)
-                print(total_prob)
                 if not np.isclose(total_prob, 1):
                     if 0 in intervals_np:
                         zero_index = np.where(intervals_np == 0)[0][0]

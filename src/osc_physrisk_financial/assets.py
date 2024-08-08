@@ -305,7 +305,7 @@ class PowerPlants(Asset):
         energy_price: float,
         r: Sequence[float],
         n: Optional[int] = 1,
-    ) -> DiscreteRandomVariable:
+    ) -> Union[DiscreteRandomVariable, float]:
         r"""Compute financial losses for a PowerPlant asset.
 
         Parameters
@@ -333,10 +333,5 @@ class PowerPlants(Asset):
 
 
         """
-        scaled_values = (
-            damages.values * self.value_0 * energy_price * self.discount(r, n)
-        )
-        res = DiscreteRandomVariable(
-            values=scaled_values, probabilities=damages.probabilities.tolist()
-        )
-        return res
+        return self.value_0 * self.discount(r, n) * energy_price * damages
+        # TODO SHOULD BE return self.cash_flows * self.discount(r, n)
