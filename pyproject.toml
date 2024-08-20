@@ -66,6 +66,9 @@ addopts = "--cov=src --cov-report html --cov-report term-missing --cov-fail-unde
 [tool.coverage.run]
 source = ["src"]
 
+[tool.coverage.report]
+skip_empty = true
+
 [tool.mypy]
 ignore_missing_imports = true
 
