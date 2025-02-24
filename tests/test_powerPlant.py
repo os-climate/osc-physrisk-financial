@@ -52,17 +52,17 @@ def test_power_plants():
 
     loss_var = pp.financial_losses(damages=damage, energy_price=elec_price, r=r_var)
 
-    assert np.isclose(
-        loss_cst.mean(), loss_var.mean()
-    ), "Losses are not calculated properly"
+    assert np.isclose(loss_cst.mean(), loss_var.mean()), (
+        "Losses are not calculated properly"
+    )
 
     # Now the same pp in two different ways
 
     pp2 = PowerPlants(capacity=900913242.0091324, av_rate=1, name=name)
     loss_var2 = pp2.financial_losses(damages=damage, energy_price=elec_price, r=r_var)
 
-    assert np.isclose(
-        loss_var.mean(), loss_var2.mean()
-    ), "Losses are not calculated properly"
+    assert np.isclose(loss_var.mean(), loss_var2.mean()), (
+        "Losses are not calculated properly"
+    )
 
     print("FINISHED DCV TEST SUCCESSFULLY!!!")
