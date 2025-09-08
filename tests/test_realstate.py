@@ -79,15 +79,15 @@ def test_asset():
     variance_loss = losses[0].var()
     expected_variance_loss = 724.0
     print(
-        f'Mean Financial Losses: {real_asset.financial_losses(["2030-02-09"], damage=discrete_rand_var)[0].mean()}'
+        f"Mean Financial Losses: {real_asset.financial_losses(['2030-02-09'], damage=discrete_rand_var)[0].mean()}"
     )
     print(
-        f'Variance Financial Losses: {real_asset.financial_losses(["2030-02-09"], damage=discrete_rand_var)[0].var()}'
+        f"Variance Financial Losses: {real_asset.financial_losses(['2030-02-09'], damage=discrete_rand_var)[0].var()}"
     )
     assert np.allclose(mean_loss, expected_mean_loss), "Mean is not calculated properly"
-    assert np.allclose(
-        variance_loss, expected_variance_loss
-    ), "Variance is not calculated properly"
+    assert np.allclose(variance_loss, expected_variance_loss), (
+        "Variance is not calculated properly"
+    )
 
     intervals_osc = np.array(
         [
@@ -150,12 +150,12 @@ def test_asset():
         ]
     )
 
-    assert np.allclose(
-        discrete_rand_var_osc.intervals, expected_intervals
-    ), "Intervals are not calculated properly"
-    assert np.allclose(
-        discrete_rand_var_osc.probabilities, expected_probabilities
-    ), "Probabilities are not calculated properly"
+    assert np.allclose(discrete_rand_var_osc.intervals, expected_intervals), (
+        "Intervals are not calculated properly"
+    )
+    assert np.allclose(discrete_rand_var_osc.probabilities, expected_probabilities), (
+        "Probabilities are not calculated properly"
+    )
 
     # zero included
 
@@ -246,7 +246,7 @@ def test_asset():
             loan_amounts=loan_amounts,
         )
 
-    print(f" LTV mean value (first date, fist asset): {ltv[0,0].mean()}")
+    print(f" LTV mean value (first date, fist asset): {ltv[0, 0].mean()}")
     means = DiscreteRandomVariable.means_vectorized(ltv)
     print(f" LTV mean values: {means}")
 
@@ -257,7 +257,7 @@ def test_asset():
     assert np.allclose(means, expected_means), "LTV mean values calculation failed"
 
     # Variances
-    print(f" LTV variance (first date, fist asset): {ltv[0,0].var()}")
+    print(f" LTV variance (first date, fist asset): {ltv[0, 0].var()}")
     vars = DiscreteRandomVariable.vars_vectorized(ltv)
     print(f" LTV variances: {vars}")
 
