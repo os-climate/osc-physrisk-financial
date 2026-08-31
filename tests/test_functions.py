@@ -1,12 +1,13 @@
-import pytest
-import pandas as pd
 import numpy as np
+import pandas as pd
+import pytest
 from scipy import optimize
+
 from osc_physrisk_financial.functions import (
-    find_root,
     check_all_nonnumeric,
-    dates_formatting,
     contains_word,
+    dates_formatting,
+    find_root,
 )
 
 
