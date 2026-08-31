@@ -1,7 +1,7 @@
 """functions for random and discrete random variables."""
 
 from abc import ABC, abstractmethod
-from typing import Optional, Union, Sequence, Any
+from collections.abc import Sequence
 
 import numpy as np
 import plotly.graph_objects as go
@@ -19,7 +19,7 @@ class RandomVariable(ABC):
         """Initialize a RandomVariable."""
 
     @abstractmethod
-    def __mul__(self, other: Union[float, int]):
+    def __mul__(self, other: float):
         """Multiply the random variable by a real number. Case  RandomVariable * real number.
 
         This method scales the pdf or pmf of the random variable by a given scalar
@@ -42,7 +42,7 @@ class RandomVariable(ABC):
 
         """
 
-    def __rmul__(self, other: Union[float, int]):
+    def __rmul__(self, other: float):
         """Multiply the random variable by a real number. Case real number * RandomVariable.
 
         This method delegates to `__mul__`, assuming commutativity of the operation.
@@ -65,7 +65,7 @@ class RandomVariable(ABC):
         return self.__mul__(-1)
 
     @abstractmethod
-    def __add__(self, other: Union[float, int]):
+    def __add__(self, other: float):
         """Add a real number to the random variable. Case RandomVariable + real number.
 
         This method shifts the pdf or pmf of the random variable by a given number
@@ -133,7 +133,7 @@ class RandomVariable(ABC):
         """
 
     @abstractmethod
-    def __eq__(self, other: Any) -> bool:
+    def __eq__(self, other: object) -> bool:
         """Check if the current instance equals another instance of a RandomVariable.
 
         Parameters
@@ -308,10 +308,10 @@ class DiscreteRandomVariable(RandomVariable):
 
     def __init__(
         self,
-        probabilities: Sequence[Union[float, int]],
-        values: Optional[Sequence[Union[float, int]]] = None,
-        intervals: Optional[Sequence[Union[float, int]]] = None,
-        convert_to_osc_format: Optional[bool] = False,
+        probabilities: Sequence[float | int],
+        values: Sequence[float | int] | None = None,
+        intervals: Sequence[float | int] | None = None,
+        convert_to_osc_format: bool | None = False,
     ):
         """Initialize the ExampleClass with probabilities, and either values or intervals.
 
@@ -392,7 +392,7 @@ class DiscreteRandomVariable(RandomVariable):
         if not np.isclose(self.probabilities.sum(), 1):
             raise ValueError("The probabilities must sum up to 1.")
 
-    def __mul__(self, other: Union[float, int]):
+    def __mul__(self, other: float):
         """Multiply the discrete random variable by a scalar.
 
         This method scales the values of the random variable by a given scalar
@@ -417,7 +417,7 @@ class DiscreteRandomVariable(RandomVariable):
         else:
             return NotImplemented
 
-    def __add__(self, other: Union[float, int]):
+    def __add__(self, other: float):
         """Add a scalar to the discrete random variable.
 
         This method shifts the values of the random variable by a given scalar
@@ -442,7 +442,7 @@ class DiscreteRandomVariable(RandomVariable):
         else:
             return NotImplemented
 
-    def __rtruediv__(self, other: Union[float, int]):
+    def __rtruediv__(self, other: float):
         r"""Implement division where a real number is divided by a DiscreteRandomVariable.
 
         :math:`a / X` where :math:`a, \\ X` are a Real number and a Discrete Random Variable, respectively.
@@ -483,7 +483,7 @@ class DiscreteRandomVariable(RandomVariable):
             values=new_values, probabilities=self.probabilities.tolist()
         )
 
-    def __eq__(self, other: Any) -> bool:
+    def __eq__(self, other: object) -> bool:
         """Determine if two DiscreteRandomVariable instances are equal based on their values and probabilities.
 
         Parameters
@@ -673,7 +673,7 @@ class DiscreteRandomVariable(RandomVariable):
         """
         return bool(np.all((min_value <= self.values) & (self.values <= max_value)))
 
-    def sample(self, n: Optional[int] = 1):
+    def sample(self, n: int | None = 1):
         """Generate `n` random samples from the discrete random variable.
 
         Parameters
@@ -857,10 +857,12 @@ class DiscreteRandomVariable(RandomVariable):
 
         """
         compute_occurrence = np.vectorize(
-            lambda drv, lambda_value, x: 1
-            - np.exp(
-                -lambda_value
-                * (1 - np.sum(drv.probabilities[np.where(drv.values <= x)[0]]))
+            lambda drv, lambda_value, x: (
+                1
+                - np.exp(
+                    -lambda_value
+                    * (1 - np.sum(drv.probabilities[np.where(drv.values <= x)[0]]))
+                )
             )
         )
         return compute_occurrence(drvs, lambda_value, x)
