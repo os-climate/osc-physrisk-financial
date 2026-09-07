@@ -1,9 +1,9 @@
+import numpy as np
+import pytest
+
 from osc_physrisk_financial.assets import RealAsset
 from osc_physrisk_financial.dynamics import ConstantGrowth
 from osc_physrisk_financial.random_variables import DiscreteRandomVariable
-
-import pytest
-import numpy as np
 
 
 def test_real_asset():
