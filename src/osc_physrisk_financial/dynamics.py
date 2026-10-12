@@ -1,7 +1,6 @@
 """Dynamics."""
 
 from abc import ABC, abstractmethod
-from typing import Optional, Union
 
 import numpy as np
 import pandas as pd
@@ -18,7 +17,7 @@ class Dynamic(ABC):
 
     """
 
-    def __init__(self, name: Optional[str] = None):
+    def __init__(self, name: str | None = None):
         """Initialize a new instance of Dynamic.
 
         Attributes
@@ -31,7 +30,7 @@ class Dynamic(ABC):
         self.data = pd.DataFrame()
 
     @abstractmethod
-    def compute_value(self, dates: Union[pd.DatetimeIndex, list]):
+    def compute_value(self, dates: pd.DatetimeIndex | list):
         """Abstract method for computing the asset value at future dates.
 
         Attributes
@@ -73,7 +72,7 @@ class ConstantGrowth(Dynamic):
 
     """
 
-    def __init__(self, growth_rate: float, value0: float, name: Optional[str] = None):
+    def __init__(self, growth_rate: float, value0: float, name: str | None = None):
         r"""Initialize a new instance of ConstantGrowth.
 
         Attributes
@@ -92,7 +91,7 @@ class ConstantGrowth(Dynamic):
         self.growth_rate = growth_rate
         self.value0 = value0
 
-    def compute_value(self, dates: Union[pd.DatetimeIndex, list]):
+    def compute_value(self, dates: pd.DatetimeIndex | list):
         """Compute the asset value at future dates.
 
         Attributes
