@@ -1,6 +1,6 @@
 """Assets definitions."""
 
-from typing import Optional, Sequence, Union
+from collections.abc import Sequence
 
 import numpy as np
 import pandas as pd
@@ -10,7 +10,7 @@ from osc_physrisk_financial.dynamics import Dynamic
 from osc_physrisk_financial.random_variables import DiscreteRandomVariable
 
 
-class Asset(object):
+class Asset:
     """Class for instantiating a general Asset.
 
     Parameters
@@ -39,9 +39,9 @@ class Asset(object):
     def __init__(
         self,
         value_0: float,
-        dynamics: Optional[Dynamic] = None,
-        name: Optional[str] = None,
-        cash_flows: Optional[Sequence] = None,
+        dynamics: Dynamic | None = None,
+        name: str | None = None,
+        cash_flows: Sequence | None = None,
     ):
         """Initialize the AssetClass with dynamics and name.
 
@@ -92,7 +92,7 @@ class RealAsset(Asset):
 
     """
 
-    def __init__(self, value_0: float, dynamics: Dynamic, name: Optional[str] = None):
+    def __init__(self, value_0: float, dynamics: Dynamic, name: str | None = None):
         """Initialize the RealAssetClass with dynamics and name.
 
         `dynamics` or `name` are optional. 'value_0 must be provided'
@@ -110,7 +110,7 @@ class RealAsset(Asset):
         super().__init__(value_0=value_0, dynamics=dynamics, name=None)
 
     def financial_losses(
-        self, dates: Union[pd.DatetimeIndex, list], damage: DiscreteRandomVariable
+        self, dates: pd.DatetimeIndex | list, damage: DiscreteRandomVariable
     ):
         """Compute financial losses for a real asset.
 
@@ -140,7 +140,7 @@ class RealAsset(Asset):
 
     def ltv(
         self,
-        dates: Union[pd.DatetimeIndex, list],
+        dates: pd.DatetimeIndex | list,
         damages: Sequence[DiscreteRandomVariable],
         loan_amounts: Sequence[float],
     ):
@@ -236,7 +236,7 @@ class PowerPlants(Asset):
     """
 
     def __init__(
-        self, dynamics: Optional[Dynamic] = None, name: Optional[str] = None, **kwargs
+        self, dynamics: Dynamic | None = None, name: str | None = None, **kwargs
     ):
         """Initialize the PowerPlantsClass with dynamics, name and a variable number of arguments.
 
@@ -268,7 +268,7 @@ class PowerPlants(Asset):
         )
 
     @staticmethod
-    def discount(r: Sequence[float], n: Optional[int] = 1) -> float:
+    def discount(r: Sequence[float], n: int | None = 1) -> float:
         r"""Compute discount for a given annual evolution of interest rates.
 
         Parameters
@@ -304,8 +304,8 @@ class PowerPlants(Asset):
         damages: DiscreteRandomVariable,
         energy_price: float,
         r: Sequence[float],
-        n: Optional[int] = 1,
-    ) -> Union[DiscreteRandomVariable, float]:
+        n: int | None = 1,
+    ) -> DiscreteRandomVariable | float:
         r"""Compute financial losses for a PowerPlant asset.
 
         Parameters
